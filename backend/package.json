@@ -1,0 +1,26 @@
+{
+  "name": "spk-saw-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Decision-support API ranking wood species for furniture using the SAW (Simple Additive Weighting) method.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test tests/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage tests/*.test.js",
+    "verify:legacy": "node scripts/reproduce-original-spreadsheet.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}
