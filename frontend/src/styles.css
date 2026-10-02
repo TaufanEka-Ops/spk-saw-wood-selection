@@ -1,0 +1,7 @@
+.app-header { border-radius: 8px; }
+.criterion-tag { margin-right: 0.25rem; }
+.score-cell { font-variant-numeric: tabular-nums; text-align: right; }
+.contribution { font-variant-numeric: tabular-nums; text-align: right; }
+table.table td.is-narrow-num { text-align: right; font-variant-numeric: tabular-nums; }
+.rank-1 td { font-weight: 600; }
+.empty-state { padding: 2rem 0; }
