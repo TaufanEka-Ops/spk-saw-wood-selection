@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="980" height="620" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .box   { fill:#ffffff; stroke:#334155; stroke-width:1.6; rx:10; }
+      .layer { fill:#f1f5f9; stroke:#cbd5e1; stroke-width:1.2; rx:14; }
+      .code  { fill:#eef2ff; stroke:#6366f1; stroke-width:1.6; rx:8; }
+      .pure  { fill:#ecfdf5; stroke:#10b981; stroke-width:2;  rx:8; }
+      .data  { fill:#fef3c7; stroke:#f59e0b; stroke-width:1.6; rx:8; }
+      .t     { font-size:14px; fill:#0f172a; font-weight:600; }
+      .s     { font-size:11.5px; fill:#475569; }
+      .layt  { font-size:12px; fill:#64748b; font-weight:700; letter-spacing:.08em; }
+      .edge  { stroke:#64748b; stroke-width:1.6; fill:none; marker-end:url(#arrow); }
+      .edge2 { stroke:#94a3b8; stroke-width:1.3; fill:none; stroke-dasharray:5 4; marker-end:url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="980" height="620" fill="#fbfdff"/>
+
+  <text x="40" y="42" font-size="20" font-weight="700" fill="#0f172a">spk-saw-wood-selection — architecture</text>
+  <text x="40" y="64" class="s">Dependencies point inward. The domain layer imports nothing from Express, Sequelize or the database.</text>
+
+  <!-- browser -->
+  <rect class="layer" x="40" y="96" width="300" height="210"/>
+  <text x="60" y="120" class="layt">BROWSER</text>
+  <rect class="code" x="60" y="136" width="260" height="52"/>
+  <text x="74" y="158" class="t">React 18 + Vite</text>
+  <text x="74" y="176" class="s">App.jsx — owns the data, renders once</text>
+  <rect class="code" x="60" y="198" width="260" height="42"/>
+  <text x="74" y="218" class="s">hooks/useResource — fetch, loading, error</text>
+  <rect class="code" x="60" y="250" width="260" height="42"/>
+  <text x="74" y="270" class="s">api/client.js — one axios instance</text>
+
+  <!-- http -->
+  <path class="edge" d="M 300 230 L 372 230"/>
+  <text x="306" y="222" class="s">HTTP / JSON</text>
+
+  <!-- server -->
+  <rect class="layer" x="380" y="96" width="300" height="330"/>
+  <text x="400" y="120" class="layt">NODE — EXPRESS</text>
+  <rect class="code" x="400" y="136" width="260" height="40"/>
+  <text x="414" y="161" class="t">routes/</text>
+  <rect class="code" x="400" y="186" width="260" height="40"/>
+  <text x="414" y="211" class="t">middleware/errorHandler</text>
+  <rect class="code" x="400" y="236" width="260" height="52"/>
+  <text x="414" y="258" class="t">repositories/</text>
+  <text x="414" y="276" class="s">memory · mysql (one interface)</text>
+  <rect class="pure" x="400" y="300" width="260" height="106"/>
+  <text x="414" y="324" class="t">domain/  ← pure, zero frameworks</text>
+  <text x="414" y="346" class="s">criteria.js — weights, normaliseWeights()</text>
+  <text x="414" y="364" class="s">saw.js — rank(), normaliseColumn()</text>
+  <text x="414" y="382" class="s">wood.js — validateAlternative()</text>
+  <text x="414" y="400" class="s">the only layer the tests need</text>
+
+  <!-- storage -->
+  <path class="edge" d="M 660 262 L 736 262"/>
+  <rect class="data" x="744" y="212" width="196" height="100"/>
+  <text x="760" y="238" class="t">MySQL</text>
+  <text x="760" y="258" class="s">Sequelize model: woods</text>
+  <text x="760" y="278" class="s">STORAGE=mysql</text>
+  <text x="760" y="296" class="s">(not needed for tests)</text>
+
+  <!-- tests -->
+  <path class="edge2" d="M 530 426 L 530 486"/>
+  <rect class="pure" x="380" y="486" width="300" height="96"/>
+  <text x="400" y="510" class="t">tests/ — node:test + supertest</text>
+  <text x="400" y="530" class="s">saw.test.js — pure SAW maths</text>
+  <text x="400" y="548" class="s">api.test.js — HTTP contract</text>
+  <text x="400" y="566" class="s">legacy reproduction pinned to the workbook</text>
+
+  <!-- reference -->
+  <rect class="data" x="40" y="360" width="300" height="150"/>
+  <text x="60" y="384" class="layt">REFERENCE (read-only)</text>
+  <text x="60" y="408" class="s">docs/reference/original-saw-workbook.xlsx</text>
+  <text x="60" y="428" class="s">→ original weighted sums and final scores,</text>
+  <text x="60" y="446" class="s">   reproduced to 1e-9 by legacyScore()</text>
+  <text x="60" y="472" class="s">docs/reference/original-project-report.pdf</text>
+  <text x="60" y="492" class="s">→ the submitted 2022 write-up</text>
+
+  <path class="edge2" d="M 340 486 L 380 500"/>
+  <text x="742" y="352" class="s" text-anchor="end">The two defects live in legacyScore():</text>
+  <text x="742" y="370" class="s" text-anchor="end">weights taken as 1/importance,</text>
+  <text x="742" y="388" class="s" text-anchor="end">cost criterion scored as a benefit.</text>
+</svg>
